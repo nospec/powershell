@@ -44,10 +44,3 @@ foreach($tenant in $tenants){
     Write-Host "Total Disks managed by ASR: $t"
 
 }
-
-
-
-
-#$item = Get-AzureRmResource -ResourceType Microsoft.Compute/disks -ResourceGroupName p-auea-711-rg-sap-oap | Select ManagedBy | Select-String "Microsoft.Compute/virtualMachines"
-
-#$item -replace ".*/" -replace "}*"
