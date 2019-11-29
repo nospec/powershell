@@ -23,9 +23,6 @@ foreach($storageAccount in $storageAccounts){
         $blobs | Where-Object{$_.BlobType -eq 'PageBlob' -and $_.Name.EndsWith('.vhd')} | ForEach-Object {
             # if a page blob is not attached as disk then LeaseStatus will be unlocked
             if($_.ICloudBlob.Properties.LeaseStatus -eq 'Unlocked'){
-                # $_.ICloudBlob.Uri.AbsoluteUri
-                # $_.Name
-                # $_ | Select *
 
                 $obj = New-Object psobject -Property @{
                     subscriptionID = $tenant
@@ -40,7 +37,6 @@ foreach($storageAccount in $storageAccounts){
                 }
                 $wholeObj += $obj
                 $obj
-                # $obj >> .\TEST.CSV
             }
         }
         }
