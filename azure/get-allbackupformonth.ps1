@@ -9,6 +9,8 @@ $endofmonth = (($startofmonth).AddMonths(1).AddSeconds(-1))
 
 $bruh = @()
 
+$track = @()
+
 $subscriptions = (Get-AzureRMSubscription).Id
 
 
@@ -49,8 +51,10 @@ foreach($sub in $subscriptions){
                 status = "Failed"
                 operation = "Backup"
                 metric = "$f / $count"
+                vmName = $failed.WorkloadName
             }
             $bruh += $obj
+            $tracked += $failed
     }
 
 
@@ -70,7 +74,9 @@ foreach($sub in $subscriptions){
 }
 
 Write-Host "Failed Jobs" -ForegroundColor Red
-$bruh | Select subscription,vName, metric, operation, status
+$bruh | Select subscription,vName, metric, operation, status, vmName
 Write-Host "Total Failed Jobs $of"
 Write-Host "Total Successful Jobs $ototal"
 Write-Host "Total Jobs $ocount"
+
+$tracked | Export-Csv -Path ".\failed.csv"
