@@ -42,6 +42,6 @@ foreach($storageAccount in $storageAccounts){
         }
     }
 }
-if($wholeObj){ $wholeObj | Export-CSV "C:\users\SMathieu\_dump\azure\TEST.CSV" }
+if($wholeObj){ $wholeObj | Export-CSV ".\TEST.CSV" }
 }
 
