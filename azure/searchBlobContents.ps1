@@ -1,6 +1,6 @@
-$tenants = (Get-AzureRmSubscription).Id 
+$tentants = (Get-AzureRmSubscription).Id 
 
-foreach($tenant in $tenants){
+foreach($tenant in $tentants){
     Select-AzureRMSubscription $tenant
 
     $storageAccounts = Get-AzureRmStorageAccount

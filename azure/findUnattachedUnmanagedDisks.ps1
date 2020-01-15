@@ -42,10 +42,14 @@ foreach($storageAccount in $storageAccounts){
         }
     }
 }
+<<<<<<< HEAD
 if($wholeObj){ 
     
     $wholeObj | Export-CSV ".\snapshots.CSV" 
 
 }
+=======
+if($wholeObj){ $wholeObj | Export-CSV ".\TEST.CSV" }
+>>>>>>> 47888bca82da616b66bf039ad6b3220cd9906e3b
 }
 
