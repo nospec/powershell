@@ -45,7 +45,10 @@ foreach($storageAccount in $storageAccounts){
 if($wholeObj){ 
     
     $wholeObj | Export-CSV ".\snapshots.CSV" 
-
+    foreach($item in $wholeObj){
+        Write-Host 'container ' + $item.StorageContainerName + ' blob ' + $item.BlobName
+        Remove-AzureStorageBlob -Container $item.StorageContainerName -Blob $item.BlobName
+        }
 }
 }
 

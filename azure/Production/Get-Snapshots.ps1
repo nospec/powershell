@@ -12,7 +12,7 @@
         # select the correct azure sub
         Select-AzureRMSubscription $tenant
         # get sub name
-        $tenantName = (Get-AzureRMContext).name
+        $subName = (Get-AzureRMContext).name
 
         # grab the snapshot details
         $getIt = Get-AzureRMSnapshot
@@ -45,7 +45,7 @@
                 if(!$test){
                     $obj = new-object psobject -Property @{
                         name = $item.Name
-                        subscription = $tenantName
+                        subscription = $subName
                         sizeGb = $item.DiskSizeGB
                         group = $item.ResourceGroupName
                         osType = $item.OsType
@@ -82,4 +82,4 @@
     Write-Host " .... Completed .... " -ForeGround Green -BackgroundColor Red
     Write-Host "Total Snapshots in Account: $countSnaps" -ForegroundColor Black -BackgroundColor White
     Write-Host "Snapshots Ready for Delete: $count" -ForegroundColor Black -BackgroundColor White
-    $readyToDelete | Select Name, subscription, Group, SizeGb, osType, tags | Export-Csv "C:\Users\SMathieu\_dump\azure\snaps.csv"
+    $readyToDelete | Select Name, subscription, Group, SizeGb, osType, tags | Export-Csv ".\managedsnaps.csv"

@@ -1,6 +1,6 @@
-$tentants = (Get-AzureRmSubscription).Id 
+$tenants = (Get-AzureRmSubscription).Id 
 
-foreach($tenant in $tentants){
+foreach($tenant in $tenants){
     Select-AzureRMSubscription $tenant
 
     $storageAccounts = Get-AzureRmStorageAccount
@@ -20,7 +20,8 @@ foreach($storageAccount in $storageAccounts){
 
         # fetch all the page blobs with extension .vhd as only Page blobs can be attached as disk to Azure VMs
         if($blobs){
-        $blobs | Where-Object{$_.BlobType -eq 'PageBlob' -and $_.Name.EndsWith('.vhd')} | ForEach-Object {
+        # $blobs | Where-Object{$_.BlobType -eq 'PageBlob' -and $_.Name.EndsWith('.vhd')} | ForEach-Object {
+        $blobs | Where-Object{$_.BlobType -eq 'PageBlob'} | ForEach-Object {
             # if a page blob is not attached as disk then LeaseStatus will be unlocked
             if($_.ICloudBlob.Properties.LeaseStatus -eq 'Unlocked'){
 
@@ -44,7 +45,7 @@ foreach($storageAccount in $storageAccounts){
 }
 if($wholeObj){ 
     
-    $wholeObj | Export-CSV ".\snapshots.CSV" 
+    $wholeObj | Export-CSV ".\contents.CSV" 
 
 }
 }
